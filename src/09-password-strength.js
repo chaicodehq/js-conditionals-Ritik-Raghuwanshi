@@ -27,4 +27,44 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+  if(password === "" || typeof(password) !== "string"){
+    return "weak"
+  }
+  function regexChecker(pattern,argument){
+    return pattern.test(argument);
+  }
+  const criteria1 = password.length >= 8;
+  const criteria2 = regexChecker(/[A-Z]/,password)
+  const criteria3 = regexChecker(/[a-z]/,password)
+  const criteria4 = regexChecker (/[0-9]/,password)
+  const criteria5 = regexChecker(/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/,password)
+
+
+  let strength = 0;
+  if(criteria1){
+    strength++;
+  }
+  if(criteria2){
+    strength++
+  }
+  if(criteria3){
+    strength++
+  }
+  if(criteria4){
+    strength++
+  }
+  if(criteria5){
+    strength++;
+  }
+
+  if(strength == 5){
+    return "very strong"
+  }else if(strength == 4){
+    return "strong"
+  }else if(strength == 3 || strength ==2){
+    return "medium"
+  }else{
+    return "weak"
+  }
+  
 }
